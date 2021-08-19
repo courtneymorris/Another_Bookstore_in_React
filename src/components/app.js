@@ -6,6 +6,21 @@ import BooksWrapper from './pages/books-wrapper';
 import AddBook from './pages/add-book';
 
 export default class App extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      bookData: []
+    }
+  }
+
+  componentDidMount() {
+    fetch("http://127.0.0.1:5000/book/get")
+    .then(response => response.json())
+    .then(data => this.setState({ bookData: data }))
+    .catch(error => console.log("error fetching all books: ", error))
+  }
+
   render() {
     return (
       <BrowserRouter>
